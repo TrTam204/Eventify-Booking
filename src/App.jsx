@@ -5,28 +5,35 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import WhatsAppButton from './components/landing/WhatsAppButton'
 
-const Home             = lazy(() => import('./pages/Home'))
-const Gallery          = lazy(() => import('./pages/Gallery'))
-const Lookbook         = lazy(() => import('./pages/Lookbook'))
-const Blog             = lazy(() => import('./pages/Blog'))
-const BlogPost         = lazy(() => import('./pages/BlogPost'))
-const Book             = lazy(() => import('./pages/Book'))
+const Home = lazy(() => import('./pages/Home'))
+const Services = lazy(() => import('./pages/Services'))
+const Restaurants = lazy(() => import('./pages/Restaurants'))
+const Photography = lazy(() => import('./pages/Photography'))
+const Gallery = lazy(() => import('./pages/Gallery'))
+const About = lazy(() => import('./pages/About'))
+const Guide = lazy(() => import('./pages/Guide'))
+const FAQ = lazy(() => import('./pages/FAQ'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Lookbook = lazy(() => import('./pages/Lookbook'))
+const Blog = lazy(() => import('./pages/Blog'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const Book = lazy(() => import('./pages/Book'))
 const BookingConfirmation = lazy(() => import('./pages/BookingConfirmation'))
-const Voucher          = lazy(() => import('./pages/Voucher'))
-const AdminLogin       = lazy(() => import('./pages/Admin/AdminLogin'))
-const AdminLayout      = lazy(() => import('./pages/Admin/AdminLayout'))
-const Dashboard        = lazy(() => import('./pages/Admin/Dashboard'))
-const Bookings         = lazy(() => import('./pages/Admin/Bookings'))
-const ValidatePayment  = lazy(() => import('./pages/Admin/ValidatePayment'))
-const Customers        = lazy(() => import('./pages/Admin/Customers'))
-const CustomerDetail   = lazy(() => import('./pages/Admin/CustomerDetail'))
-const Waitlist         = lazy(() => import('./pages/Admin/Waitlist'))
-const GalleryAdmin     = lazy(() => import('./pages/Admin/GalleryAdmin'))
-const Testimonials     = lazy(() => import('./pages/Admin/Testimonials'))
-const BlogAdmin        = lazy(() => import('./pages/Admin/BlogAdmin'))
-const Analytics        = lazy(() => import('./pages/Admin/Analytics'))
-const Vouchers         = lazy(() => import('./pages/Admin/Vouchers'))
-const Settings         = lazy(() => import('./pages/Admin/Settings'))
+const Voucher = lazy(() => import('./pages/Voucher'))
+const AdminLogin = lazy(() => import('./pages/Admin/AdminLogin'))
+const AdminLayout = lazy(() => import('./pages/Admin/AdminLayout'))
+const Dashboard = lazy(() => import('./pages/Admin/Dashboard'))
+const Bookings = lazy(() => import('./pages/Admin/Bookings'))
+const ValidatePayment = lazy(() => import('./pages/Admin/ValidatePayment'))
+const Customers = lazy(() => import('./pages/Admin/Customers'))
+const CustomerDetail = lazy(() => import('./pages/Admin/CustomerDetail'))
+const Waitlist = lazy(() => import('./pages/Admin/Waitlist'))
+const GalleryAdmin = lazy(() => import('./pages/Admin/GalleryAdmin'))
+const Testimonials = lazy(() => import('./pages/Admin/Testimonials'))
+const BlogAdmin = lazy(() => import('./pages/Admin/BlogAdmin'))
+const Analytics = lazy(() => import('./pages/Admin/Analytics'))
+const Vouchers = lazy(() => import('./pages/Admin/Vouchers'))
+const Settings = lazy(() => import('./pages/Admin/Settings'))
 
 const PublicLayout = ({ children }) => (
   <>
@@ -38,8 +45,8 @@ const PublicLayout = ({ children }) => (
 )
 
 const Spinner = () => (
-  <div style={{ minHeight: '100vh', background: '#2C1A0E', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ width: 40, height: 40, border: '3px solid #B5935A', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+  <div style={{ minHeight: '100vh', background: '#F7FBF7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ width: 40, height: 40, border: '3px solid #16A34A', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
     <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
   </div>
 )
@@ -47,12 +54,18 @@ const Spinner = () => (
 export default function App() {
   return (
     <BrowserRouter>
-      <Toaster position="bottom-right" toastOptions={{ style: { background: '#2C1A0E', color: '#FAF7F2', border: '1px solid #B5935A' } }} />
+      <Toaster position="bottom-right" toastOptions={{ style: { background: '#17201A', color: '#FFFFFF', border: '1px solid #E4EAE5' } }} />
       <Suspense fallback={<Spinner />}>
         <Routes>
-          {/* Public routes */}
           <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+          <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
+          <Route path="/restaurants" element={<PublicLayout><Restaurants /></PublicLayout>} />
+          <Route path="/photography" element={<PublicLayout><Photography /></PublicLayout>} />
           <Route path="/gallery" element={<PublicLayout><Gallery /></PublicLayout>} />
+          <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+          <Route path="/guide" element={<PublicLayout><Guide /></PublicLayout>} />
+          <Route path="/faq" element={<PublicLayout><FAQ /></PublicLayout>} />
+          <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
           <Route path="/lookbook" element={<PublicLayout><Lookbook /></PublicLayout>} />
           <Route path="/blog" element={<PublicLayout><Blog /></PublicLayout>} />
           <Route path="/blog/:slug" element={<PublicLayout><BlogPost /></PublicLayout>} />
@@ -60,7 +73,6 @@ export default function App() {
           <Route path="/booking-confirmation" element={<PublicLayout><BookingConfirmation /></PublicLayout>} />
           <Route path="/voucher" element={<PublicLayout><Voucher /></PublicLayout>} />
 
-          {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
