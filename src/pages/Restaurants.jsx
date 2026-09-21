@@ -1,26 +1,40 @@
+import { Link } from 'react-router-dom'
+import { restaurants, formatVnd } from '../constants/restaurants'
+
 export default function Restaurants() {
   return (
     <div className="page-shell">
       <div className="container-wide section-pad page-content">
-        <p className="eyebrow-dark">Nhà hàng & sự kiện</p>
-        <h1 className="display-dark page-title">Trải nghiệm ẩm thực cho sự kiện của bạn</h1>
-        <p className="lead-dark page-copy">
-          Từ tiệc thân mật đến sự kiện doanh nghiệp, chúng tôi kết nối bạn với không gian ăn uống, món ăn và đội ngũ tổ chức đồng bộ với tổng thể sự kiện.
-        </p>
+        <div className="page-hero">
+          <p className="eyebrow-dark">Nhà hàng</p>
+          <h1 className="page-title">Không gian ẩm thực cho sự kiện đáng nhớ</h1>
+          <p className="page-copy">
+            Tìm địa điểm phù hợp với phong cách tiệc, số lượng khách và cảm giác mà bạn muốn tạo ra cho ngày trọng đại.
+          </p>
+        </div>
 
-        <div className="feature-grid">
-          <article className="info-card">
-            <h2>Không gian tiệc</h2>
-            <p>Chỗ ngồi, phong cách trang trí và âm thanh phù hợp cho các dịp sang trọng hoặc gần gũi.</p>
-          </article>
-          <article className="info-card">
-            <h2>Thực đơn tùy chỉnh</h2>
-            <p>Chọn món ăn theo khẩu vị, phong cách và số lượng khách mời cho mỗi sự kiện.</p>
-          </article>
-          <article className="info-card">
-            <h2>Đội ngũ phục vụ</h2>
-            <p>Phục vụ chuyên nghiệp, đúng tiến độ và tạo trải nghiệm ẩm thực đáng nhớ.</p>
-          </article>
+        <div className="card-grid restaurant-grid">
+          {restaurants.map((restaurant) => (
+            <article key={restaurant.id} className="domain-card">
+              <img src={restaurant.image} alt={restaurant.name} />
+              <div className="domain-card-body">
+                <span className="card-tag">Sức chứa {restaurant.capacityMin}-{restaurant.capacityMax}</span>
+                <h2>{restaurant.name}</h2>
+                <p>{restaurant.shortDescription}</p>
+                <div className="restaurant-meta">
+                  <span>{restaurant.address}</span>
+                </div>
+                <div className="card-meta-row">
+                  <strong>{formatVnd(restaurant.priceFrom)}</strong>
+                  <span>Khởi điểm</span>
+                </div>
+                <div className="card-actions">
+                  <Link to={`/restaurants/${restaurant.slug}`} className="btn btn-primary">Xem chi tiết</Link>
+                  <Link to="/book" className="btn btn-ghost">Đặt ngay</Link>
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </div>

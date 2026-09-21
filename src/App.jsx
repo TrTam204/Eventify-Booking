@@ -7,8 +7,11 @@ import WhatsAppButton from './components/landing/WhatsAppButton'
 
 const Home = lazy(() => import('./pages/Home'))
 const Services = lazy(() => import('./pages/Services'))
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'))
 const Restaurants = lazy(() => import('./pages/Restaurants'))
+const RestaurantDetail = lazy(() => import('./pages/RestaurantDetail'))
 const Photography = lazy(() => import('./pages/Photography'))
+const PhotographyDetail = lazy(() => import('./pages/PhotographyDetail'))
 const Gallery = lazy(() => import('./pages/Gallery'))
 const About = lazy(() => import('./pages/About'))
 const Guide = lazy(() => import('./pages/Guide'))
@@ -59,8 +62,11 @@ export default function App() {
         <Routes>
           <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
           <Route path="/services" element={<PublicLayout><Services /></PublicLayout>} />
+          <Route path="/services/:slug" element={<PublicLayout><ServiceDetail /></PublicLayout>} />
           <Route path="/restaurants" element={<PublicLayout><Restaurants /></PublicLayout>} />
+          <Route path="/restaurants/:slug" element={<PublicLayout><RestaurantDetail /></PublicLayout>} />
           <Route path="/photography" element={<PublicLayout><Photography /></PublicLayout>} />
+          <Route path="/photography/:slug" element={<PublicLayout><PhotographyDetail /></PublicLayout>} />
           <Route path="/gallery" element={<PublicLayout><Gallery /></PublicLayout>} />
           <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
           <Route path="/guide" element={<PublicLayout><Guide /></PublicLayout>} />

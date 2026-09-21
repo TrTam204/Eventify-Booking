@@ -1,18 +1,27 @@
 import { Link } from 'react-router-dom'
+import { eventServices, formatVnd } from '../constants/eventServices'
+import { restaurants } from '../constants/restaurants'
+import { photographyPackages } from '../constants/photography'
 
 const serviceCategories = [
-  { title: 'Tiệc cưới', description: 'Trải nghiệm cưới theo phong cách riêng, từ không gian đến âm nhạc và thực đơn.', image: '/assets/bride-jhumar.jpg' },
-  { title: 'Sinh nhật', description: 'Tổ chức những buổi tiệc vui, sáng tạo và đáng nhớ cho mọi độ tuổi.', image: '/assets/detail-kalire.jpg' },
-  { title: 'Makeup', description: 'Makeup chuyên nghiệp cho cô dâu, chụp ảnh, sự kiện và phong cách cá nhân.', image: '/assets/floral-vine-hands.jpg' },
-  { title: 'Chụp hình', description: 'Ghi lại khoảnh khắc đẹp với đội ngũ nhiếp ảnh giàu kinh nghiệm.', image: '/assets/crossed-hands-white.jpg' },
-  { title: 'Nhà hàng', description: 'Không gian ẩm thực sang trọng cho sự kiện, tiệc riêng và gặp gỡ doanh nghiệp.', image: '/assets/process-applying.jpg' },
-]
+  eventServices.find((service) => service.slug === 'tiec-cuoi-tron-goi'),
+  eventServices.find((service) => service.slug === 'tiec-sinh-nhat'),
+  eventServices.find((service) => service.slug === 'makeup-co-dau'),
+  photographyPackages.find((item) => item.slug === 'anh-cuoi'),
+  restaurants.find((restaurant) => restaurant.slug === 'unam-garden'),
+].map((item) => ({
+  title: item.name,
+  description: item.shortDescription,
+  image: item.image,
+  link: item.category ? (item.category === 'Ảnh cưới' ? `/photography/${item.slug}` : `/services/${item.slug}`) : `/restaurants/${item.slug}`,
+}))
 
-const featureHighlights = [
-  { title: 'Dịch vụ trọn gói', description: 'Kết hợp đa dịch vụ để quy trình tổ chức sự kiện trở nên thuận tiện hơn.' },
-  { title: 'Chuyên nghiệp', description: 'Đội ngũ tư vấn, lên kế hoạch và triển khai chu đáo theo từng nhu cầu.' },
-  { title: 'Kinh nghiệm thực tế', description: 'Các gói đã được tối ưu cho các sự kiện cưới, sinh nhật và tiệc gia đình.' },
-]
+const featureHighlights = eventServices.filter((service) => service.isFeatured).slice(0, 3).map((service) => ({
+  title: service.name,
+  description: service.shortDescription,
+  link: `/services/${service.slug}`,
+  price: formatVnd(service.priceFrom),
+}))
 
 const processSteps = [
   { step: '01', title: 'Chọn dịch vụ', description: 'Lựa chọn loại sự kiện và dịch vụ phù hợp với phong cách của bạn.' },
@@ -83,7 +92,7 @@ export default function Home() {
                 <div className="category-card-body">
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
-                  <Link to="/services">Xem chi tiết</Link>
+                  <Link to={service.link}>Xem chi tiết</Link>
                 </div>
               </article>
             ))}
@@ -106,6 +115,8 @@ export default function Home() {
               <article key={item.title} className="info-card">
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
+                <p className="card-price-inline">{item.price}</p>
+                <Link to={item.link} className="card-link-inline">Xem chi tiết</Link>
               </article>
             ))}
           </div>
@@ -115,15 +126,15 @@ export default function Home() {
       <section className="section-pad section-soft">
         <div className="container-wide split-grid">
           <div className="visual-panel">
-            <img src="/assets/hands-babysbreath.jpg" alt="Luxury event dining experience" />
+            <img src={restaurants[0].image} alt={restaurants[0].name} />
           </div>
           <div className="content-panel">
             <p className="eyebrow eyebrow-dark">Nhà hàng nổi bật</p>
-            <h2>Không gian ăn uống và tổ chức sự kiện theo phong cách hiện đại</h2>
+            <h2>{restaurants[0].name}</h2>
             <p>
-              Từ tiệc nhỏ đến sự kiện lớn, UnAm Booking mang đến không gian, thực đơn và phong cách phục vụ phù hợp với từng dịp đặc biệt.
+              {restaurants[0].shortDescription}
             </p>
-            <Link to="/restaurants" className="btn btn-primary">Khám phá nhà hàng</Link>
+            <Link to={`/restaurants/${restaurants[0].slug}`} className="btn btn-primary">Khám phá nhà hàng</Link>
           </div>
         </div>
       </section>
@@ -132,14 +143,14 @@ export default function Home() {
         <div className="container-wide split-grid reverse-layout">
           <div className="content-panel">
             <p className="eyebrow eyebrow-dark">Chụp hình</p>
-            <h2>Ghi lại từng khoảnh khắc đẹp trong ngày trọng đại</h2>
+            <h2>{photographyPackages[0].name}</h2>
             <p>
-              Dịch vụ chụp hình của chúng tôi tập trung vào ánh sáng, góc nhìn tự nhiên và kể chuyện bằng hình ảnh, giúp sự kiện có một bộ sưu tập đẹp như ký ức.
+              {photographyPackages[0].shortDescription}
             </p>
-            <Link to="/photography" className="btn btn-primary">Xem thêm</Link>
+            <Link to={`/photography/${photographyPackages[0].slug}`} className="btn btn-primary">Xem thêm</Link>
           </div>
           <div className="visual-panel">
-            <img src="/assets/crossed-hands-white.jpg" alt="Wedding photography session" />
+            <img src={photographyPackages[0].image} alt={photographyPackages[0].name} />
           </div>
         </div>
       </section>
